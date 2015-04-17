@@ -1,17 +1,22 @@
-package com.jayseeofficial.littlepoller;
+package com.jayseeofficial.littlepoller.ui;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.jayseeofficial.littlepoller.R;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    private Class startActivity = DebugActivity.class;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        startActivity(new Intent(this, startActivity));
     }
 
 
