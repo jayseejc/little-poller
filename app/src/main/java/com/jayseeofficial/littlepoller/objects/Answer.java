@@ -1,9 +1,11 @@
 package com.jayseeofficial.littlepoller.objects;
 
+import java.io.Serializable;
+
 /**
  * Created by jon on 17/04/15.
  */
-public class Answer {
+public class Answer implements Serializable{
     private String text;
     private int count;
 

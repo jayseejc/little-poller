@@ -1,12 +1,13 @@
 package com.jayseeofficial.littlepoller.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Created by jon on 17/04/15.
  */
-public class Poll {
+public class Poll implements Serializable{
 
     private static final Random random = new Random();
 

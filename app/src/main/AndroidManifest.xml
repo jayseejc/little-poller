@@ -20,6 +20,10 @@
             android:name=".ui.DebugActivity"
             android:label="@string/title_activity_debug" >
         </activity>
+        <activity
+            android:name=".ui.AddPollActivity"
+            android:label="@string/title_activity_add_poll" >
+        </activity>
     </application>
 
 </manifest>

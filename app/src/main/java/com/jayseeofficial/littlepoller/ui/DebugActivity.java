@@ -1,5 +1,6 @@
 package com.jayseeofficial.littlepoller.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -26,6 +27,11 @@ public class DebugActivity extends ActionBarActivity {
     void showAllPolls() {
         List<Poll> polls = Program.pollManager.getAllPolls();
         for (Poll poll : polls) txtDump.append(poll.getTitle() + " by " + poll.getCreator() + "\n");
+    }
+
+    @OnClick(R.id.btn_debug_add_poll_activity)
+    void addPoll() {
+        startActivity(new Intent(this, AddPollActivity.class));
     }
 
     @Override
