@@ -41,9 +41,8 @@ public class AddPollActivity extends ActionBarActivity {
 
     private void updateAnswerList() {
         txtAnswerList.setText("Answers: \n");
-        for (Answer answer : poll.getAnswers()) {
+        for (Answer answer : poll.getAnswers())
             txtAnswerList.append("- " + answer.getText() + "\n");
-        }
     }
 
     @Override
@@ -80,6 +79,8 @@ public class AddPollActivity extends ActionBarActivity {
     }
 
     private void savePoll() {
+        poll.setTitle(txtTitle.getText().toString());
+        poll.setCreator(txtCreator.getText().toString());
         Program.pollManager.savePoll(poll);
     }
 }
