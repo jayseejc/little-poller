@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class DummyPollManager implements PollManager {
 
-    int numPolls = 20;
-    int numAnswers = 5;
+    private static final int numPolls = 20;
+    private static final int numAnswers = 5;
 
-    @Override
-    public List<Poll> getAllPolls() {
-        List<Poll> polls = new ArrayList<>(numPolls);
+    private List<Poll> polls = new ArrayList<>();
+
+    public DummyPollManager() {
         for (int i = 0; i < numPolls; i++) {
             Poll poll = new Poll();
             poll.setTitle("Sample poll " + (i + 1));
@@ -28,24 +28,26 @@ public class DummyPollManager implements PollManager {
             }
             polls.add(poll);
         }
+    }
+
+    @Override
+    public List<Poll> getAllPolls() {
         return polls;
     }
 
     @Override
     public Poll getPoll(int id) {
-        Poll poll = new Poll();
-        poll.setTitle("Sample poll");
-        poll.setCreator("John Doe");
-        for (int j = 0; j < numAnswers; j++) {
-            Answer answer = new Answer();
-            answer.setText("Sample answer " + (j + 1));
-            poll.addAnswer(answer);
-        }
-        return poll;
+        for (Poll poll : polls) if (poll.getId() == id) return poll;
+        return null;
     }
 
     @Override
     public void savePoll(Poll poll) {
-        // Do nothing. Dummy method.
+        polls.add(poll);
+    }
+
+    @Override
+    public void deletePoll(int id) {
+        polls.remove(getPoll(id));
     }
 }

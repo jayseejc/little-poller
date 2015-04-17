@@ -10,4 +10,5 @@
     <string name="answer">Answer</string>
     <string name="add_answer">Add Answer</string>
     <string name="add_poll">Add poll</string>
+    <string name="title_activity_poll_list">PollListActivity</string>
 </resources>
