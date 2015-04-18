@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.jayseeofficial.littlepoller.Program;
 import com.jayseeofficial.littlepoller.R;
 import com.jayseeofficial.littlepoller.objects.Poll;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 public class PollListActivity extends ActionBarActivity {
 
@@ -26,6 +30,27 @@ public class PollListActivity extends ActionBarActivity {
         Intent i = new Intent(this, AnswerPollActivity.class);
         i.putExtra(AnswerPollActivity.POLL_DATA, poll);
         startActivity(i);
+    }
+
+    @OnItemLongClick(R.id.lv_polls)
+    boolean onItemLongClick(int position) {
+        final Poll poll = adapter.getItem(position);
+        new MaterialDialog.Builder(this)
+                .title("Delete poll " + poll.getTitle() + "?")
+                .positiveText("Delete")
+                .negativeText("Cancel")
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        deletePoll(poll);
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        dialog.dismiss();
+                    }
+                }).show();
+        return true;
     }
 
     @Override
@@ -59,4 +84,23 @@ public class PollListActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void deletePoll(Poll poll) {
+        // Show an empty adapter temporarily, to avoid the headache of asynchronous edits to the
+        // list's contents throwing exceptions.
+        lvPolls.setAdapter(new EmptyAdapter());
+        Program.pollManager.deletePoll(poll.getId());
+        adapter = new PollAdapter(this);
+        lvPolls.setAdapter(adapter);
+    }
+
+    /**
+     * Empty list adapter to enable when updating the polls list
+     */
+    private class EmptyAdapter extends ArrayAdapter<Void> {
+        public EmptyAdapter() {
+            super(PollListActivity.this, android.R.layout.simple_list_item_1);
+        }
+    }
+
 }
