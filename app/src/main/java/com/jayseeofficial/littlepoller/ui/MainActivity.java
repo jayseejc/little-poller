@@ -3,42 +3,24 @@ package com.jayseeofficial.littlepoller.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.jayseeofficial.littlepoller.R;
-
-
+/**
+ * Simple hack of a class to make starting the true main activity a little more easy to make dynamic
+ */
 public class MainActivity extends ActionBarActivity {
+
+    private static final int ACTIVITY_RESULT_CODE = 456423;
 
     private Class startActivity = DebugActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, startActivity));
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        startActivityForResult(new Intent(this, startActivity), ACTIVITY_RESULT_CODE);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        finish();
     }
 }

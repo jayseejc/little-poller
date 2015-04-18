@@ -16,4 +16,6 @@ public interface PollManager {
     public abstract void savePoll(Poll poll);
 
     public abstract void deletePoll(int id);
+
+    public abstract void updatePoll(Poll poll);
 }

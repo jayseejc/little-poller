@@ -20,6 +20,8 @@ import butterknife.OnItemLongClick;
 
 public class PollListActivity extends ActionBarActivity {
 
+    private static final int EDIT_REQUEST_CODE = 4562;
+
     @InjectView(R.id.lv_polls)
     ListView lvPolls;
     PollAdapter adapter;
@@ -36,8 +38,10 @@ public class PollListActivity extends ActionBarActivity {
     boolean onItemLongClick(int position) {
         final Poll poll = adapter.getItem(position);
         new MaterialDialog.Builder(this)
-                .title("Delete poll " + poll.getTitle() + "?")
+                .title(poll.getTitle())
+                .content("What would you like to do?")
                 .positiveText("Delete")
+                .neutralText("Edit")
                 .negativeText("Cancel")
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
@@ -46,11 +50,22 @@ public class PollListActivity extends ActionBarActivity {
                     }
 
                     @Override
+                    public void onNeutral(MaterialDialog dialog) {
+                        editPoll(poll);
+                    }
+
+                    @Override
                     public void onNegative(MaterialDialog dialog) {
                         dialog.dismiss();
                     }
                 }).show();
         return true;
+    }
+
+    private void editPoll(Poll poll) {
+        Intent i = new Intent(this, EditPollActivity.class);
+        i.putExtra(EditPollActivity.POLL_DATA, poll);
+        startActivityForResult(i, EDIT_REQUEST_CODE);
     }
 
     @Override
@@ -85,11 +100,30 @@ public class PollListActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case EDIT_REQUEST_CODE:
+                refreshPolls();
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
     private void deletePoll(Poll poll) {
         // Show an empty adapter temporarily, to avoid the headache of asynchronous edits to the
         // list's contents throwing exceptions.
         lvPolls.setAdapter(new EmptyAdapter());
         Program.pollManager.deletePoll(poll.getId());
+        adapter = new PollAdapter(this);
+        lvPolls.setAdapter(adapter);
+    }
+
+    private void refreshPolls() {
+        // Ugly solution. Gotta figure out something better.
+        lvPolls.setAdapter(new EmptyAdapter());
         adapter = new PollAdapter(this);
         lvPolls.setAdapter(adapter);
     }

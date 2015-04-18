@@ -36,7 +36,7 @@ public class DebugActivity extends ActionBarActivity {
 
     @OnClick(R.id.btn_debug_add_poll_activity)
     void addPoll() {
-        startActivity(new Intent(this, AddPollActivity.class));
+        startActivity(new Intent(this, EditPollActivity.class));
     }
 
     @Override

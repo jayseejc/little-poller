@@ -50,4 +50,17 @@ public class DummyPollManager implements PollManager {
     public void deletePoll(int id) {
         polls.remove(getPoll(id));
     }
+
+    @Override
+    public void updatePoll(Poll newPoll) {
+        for (int i = 0; i < polls.size(); i++) {
+            if (polls.get(i).getId() == newPoll.getId()) {
+                polls.remove(i);
+                polls.add(i, newPoll);
+                return;
+            }
+        }
+        savePoll(newPoll);
+
+    }
 }

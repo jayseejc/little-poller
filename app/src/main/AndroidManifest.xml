@@ -21,7 +21,7 @@
             android:label="@string/title_activity_debug" >
         </activity>
         <activity
-            android:name=".ui.AddPollActivity"
+            android:name=".ui.EditPollActivity"
             android:label="@string/title_activity_add_poll" >
         </activity>
         <activity
