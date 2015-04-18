@@ -9,9 +9,9 @@ import android.support.v7.app.ActionBarActivity;
  */
 public class MainActivity extends ActionBarActivity {
 
-    private static final int ACTIVITY_RESULT_CODE = 456423;
+    private static final int ACTIVITY_RESULT_CODE = 8621;
 
-    private Class startActivity = DebugActivity.class;
+    private Class startActivity = PollListActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

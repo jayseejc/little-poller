@@ -30,17 +30,6 @@
         android:layout_alignEnd="@+id/txt_Title"
         android:hint="@string/creator" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_answer"
-        android:layout_below="@+id/txt_creator"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/txt_creator"
-        android:layout_alignEnd="@+id/txt_creator"
-        android:hint="@string/answer" />
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +38,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/btn_add_answer">
+        android:layout_below="@+id/txt_creator"
+        android:id="@+id/scrollView">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,14 +49,14 @@
             android:id="@+id/txt_answer_list" />
     </ScrollView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_answer"
-        android:id="@+id/btn_add_answer"
-        android:layout_below="@+id/txt_answer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <at.markushi.ui.CircleButton
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:layout_alignBottom="@+id/scrollView"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView"
+        android:src="@drawable/ic_add_white_48dp"
+        android:id="@+id/btn_add_answer" />
 
 
 </RelativeLayout>

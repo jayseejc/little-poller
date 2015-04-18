@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jayseeofficial.littlepoller.Program;
 import com.jayseeofficial.littlepoller.R;
 import com.jayseeofficial.littlepoller.objects.Answer;
@@ -29,8 +31,6 @@ public class EditPollActivity extends ActionBarActivity {
     EditText txtTitle;
     @InjectView(R.id.txt_creator)
     EditText txtCreator;
-    @InjectView(R.id.txt_answer)
-    EditText txtAnswer;
     @InjectView(R.id.txt_answer_list)
     TextView txtAnswerList;
 
@@ -38,10 +38,18 @@ public class EditPollActivity extends ActionBarActivity {
 
     @OnClick(R.id.btn_add_answer)
     void addAnswer() {
-        Answer answer = new Answer();
-        answer.setText(txtAnswer.getText().toString());
-        poll.addAnswer(answer);
-        updateAnswerList();
+        new MaterialDialog.Builder(this)
+                .title("New answer")
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .input(R.string.answer,R.string.empty,new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog dialog, CharSequence charSequence) {
+                        Answer answer=new Answer();
+                        answer.setText(charSequence.toString());
+                        poll.addAnswer(answer);
+                        updateAnswerList();
+                    }
+                }).show();
     }
 
     private void updateAnswerList() {
