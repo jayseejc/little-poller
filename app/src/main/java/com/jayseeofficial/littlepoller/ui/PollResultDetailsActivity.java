@@ -37,6 +37,7 @@ public class PollResultDetailsActivity extends ActionBarActivity {
             throw new IllegalArgumentException("Must provide a valid poll");
         }
         poll = (Poll) s;
+        txtTitle.setText(poll.getTitle() + " by " + poll.getCreator());
         showAnswers();
     }
 
