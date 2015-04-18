@@ -2,7 +2,7 @@ package com.jayseeofficial.littlepoller;
 
 import android.app.Application;
 
-import com.jayseeofficial.littlepoller.polls.DummyPollManager;
+import com.jayseeofficial.littlepoller.polls.FilesPollManager;
 import com.jayseeofficial.littlepoller.polls.PollManager;
 
 /**
@@ -10,6 +10,10 @@ import com.jayseeofficial.littlepoller.polls.PollManager;
  */
 public class Program extends Application {
 
-    public static PollManager pollManager=new DummyPollManager();
+    public static PollManager pollManager;
+
+    public void onCreate() {
+        pollManager = new FilesPollManager(this);
+    }
 
 }

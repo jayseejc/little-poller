@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jayseeofficial.littlepoller" >
+    package="com.jayseeofficial.littlepoller">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name=".Program">
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,28 +19,22 @@
         </activity>
         <activity
             android:name=".ui.DebugActivity"
-            android:label="@string/title_activity_debug" >
-        </activity>
+            android:label="@string/title_activity_debug"></activity>
         <activity
             android:name=".ui.EditPollActivity"
-            android:label="@string/title_activity_add_poll" >
-        </activity>
+            android:label="@string/title_activity_add_poll"></activity>
         <activity
             android:name=".ui.PollListActivity"
-            android:label="@string/title_activity_poll_list" >
-        </activity>
+            android:label="@string/title_activity_poll_list"></activity>
         <activity
             android:name=".ui.AnswerPollActivity"
-            android:label="@string/title_activity_answer_poll" >
-        </activity>
+            android:label="@string/title_activity_answer_poll"></activity>
         <activity
             android:name=".ui.PollResultListActivity"
-            android:label="@string/title_activity_poll_result_list" >
-        </activity>
+            android:label="@string/title_activity_poll_result_list"></activity>
         <activity
             android:name=".ui.PollResultDetailsActivity"
-            android:label="@string/title_activity_poll_result_details" >
-        </activity>
+            android:label="@string/title_activity_poll_result_details"></activity>
     </application>
 
 </manifest>
