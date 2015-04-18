@@ -1,5 +1,6 @@
 package com.jayseeofficial.littlepoller.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -7,21 +8,33 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.jayseeofficial.littlepoller.R;
+import com.jayseeofficial.littlepoller.objects.Poll;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 public class PollListActivity extends ActionBarActivity {
 
     @InjectView(R.id.lv_polls)
     ListView lvPolls;
+    PollAdapter adapter;
+
+    @OnItemClick(R.id.lv_polls)
+    void onItemClick(int position) {
+        Poll poll = adapter.getItem(position);
+        Intent i = new Intent(this, AnswerPollActivity.class);
+        i.putExtra(AnswerPollActivity.POLL_DATA, poll);
+        startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll_list);
         ButterKnife.inject(this);
-        lvPolls.setAdapter(new PollAdapter(this));
+        adapter = new PollAdapter(this);
+        lvPolls.setAdapter(adapter);
     }
 
 

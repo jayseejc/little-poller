@@ -28,6 +28,10 @@
             android:name=".ui.PollListActivity"
             android:label="@string/title_activity_poll_list" >
         </activity>
+        <activity
+            android:name=".ui.AnswerPollActivity"
+            android:label="@string/title_activity_answer_poll" >
+        </activity>
     </application>
 
 </manifest>

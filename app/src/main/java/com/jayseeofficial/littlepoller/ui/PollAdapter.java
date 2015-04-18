@@ -46,6 +46,11 @@ public class PollAdapter extends ArrayAdapter<Poll> {
     }
 
     @Override
+    public Poll getItem(int position) {
+        return polls.get(position);
+    }
+
+    @Override
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder;
         if (view != null) holder = (ViewHolder) view.getTag();

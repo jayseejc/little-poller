@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jayseeofficial.littlepoller.ui.AnswerPollActivity">
+    <item
+        android:id="@+id/action_submit"
+        android:title="@string/submit"
+        android:icon="@drawable/ic_check_white_36dp"
+        app:showAsAction="always" />
+</menu>
