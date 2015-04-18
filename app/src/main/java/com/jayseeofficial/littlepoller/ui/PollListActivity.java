@@ -15,6 +15,7 @@ import com.jayseeofficial.littlepoller.objects.Poll;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 
@@ -25,6 +26,11 @@ public class PollListActivity extends ActionBarActivity {
     @InjectView(R.id.lv_polls)
     ListView lvPolls;
     PollAdapter adapter;
+
+    @OnClick(R.id.btn_add_poll)
+    void onAddButtonClick() {
+        editPoll(null);
+    }
 
     @OnItemClick(R.id.lv_polls)
     void onItemClick(int position) {
@@ -62,10 +68,26 @@ public class PollListActivity extends ActionBarActivity {
         return true;
     }
 
-    private void editPoll(Poll poll) {
+    void editPoll(Poll poll) {
         Intent i = new Intent(this, EditPollActivity.class);
         i.putExtra(EditPollActivity.POLL_DATA, poll);
         startActivityForResult(i, EDIT_REQUEST_CODE);
+    }
+
+    void deletePoll(Poll poll) {
+        // Show an empty adapter temporarily, to avoid the headache of asynchronous edits to the
+        // list's contents throwing exceptions.
+        lvPolls.setAdapter(new EmptyAdapter());
+        Program.pollManager.deletePoll(poll.getId());
+        adapter = new PollAdapter(this);
+        lvPolls.setAdapter(adapter);
+    }
+
+    void refreshPolls() {
+        // Ugly solution. Gotta figure out something better.
+        lvPolls.setAdapter(new EmptyAdapter());
+        adapter = new PollAdapter(this);
+        lvPolls.setAdapter(adapter);
     }
 
     @Override
@@ -93,11 +115,16 @@ public class PollListActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_view_results) {
+            showResultsActivity();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void showResultsActivity() {
+        startActivity(new Intent(this, PollResultListActivity.class));
     }
 
     @Override
@@ -110,22 +137,6 @@ public class PollListActivity extends ActionBarActivity {
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
         }
-    }
-
-    private void deletePoll(Poll poll) {
-        // Show an empty adapter temporarily, to avoid the headache of asynchronous edits to the
-        // list's contents throwing exceptions.
-        lvPolls.setAdapter(new EmptyAdapter());
-        Program.pollManager.deletePoll(poll.getId());
-        adapter = new PollAdapter(this);
-        lvPolls.setAdapter(adapter);
-    }
-
-    private void refreshPolls() {
-        // Ugly solution. Gotta figure out something better.
-        lvPolls.setAdapter(new EmptyAdapter());
-        adapter = new PollAdapter(this);
-        lvPolls.setAdapter(adapter);
     }
 
     /**

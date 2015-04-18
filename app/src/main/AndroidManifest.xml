@@ -32,6 +32,14 @@
             android:name=".ui.AnswerPollActivity"
             android:label="@string/title_activity_answer_poll" >
         </activity>
+        <activity
+            android:name=".ui.PollResultListActivity"
+            android:label="@string/title_activity_poll_result_list" >
+        </activity>
+        <activity
+            android:name=".ui.PollResultDetailsActivity"
+            android:label="@string/title_activity_poll_result_details" >
+        </activity>
     </application>
 
 </manifest>

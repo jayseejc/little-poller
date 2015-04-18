@@ -14,4 +14,7 @@
     <string name="title_activity_answer_poll">AnswerPollActivity</string>
     <string name="submit">Submit</string>
     <string name="empty" />
+    <string name="view_results">View poll results</string>
+    <string name="title_activity_poll_result_list">PollResultListActivity</string>
+    <string name="title_activity_poll_result_details">PollResultDetailsActivity</string>
 </resources>
