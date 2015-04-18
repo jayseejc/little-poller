@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jayseeofficial.littlepoller.Program;
 import com.jayseeofficial.littlepoller.R;
 import com.jayseeofficial.littlepoller.objects.Answer;
 import com.jayseeofficial.littlepoller.objects.Poll;
@@ -90,6 +91,7 @@ public class AnswerPollActivity extends ActionBarActivity {
         if (answerId != -1) {
             for (Answer answer : mPoll.getAnswers())
                 if (answer.getId() == answerId) answer.addToCount();
+            Program.pollManager.updatePoll(mPoll);
             setResult(Activity.RESULT_OK);
             finish();
         } else {
