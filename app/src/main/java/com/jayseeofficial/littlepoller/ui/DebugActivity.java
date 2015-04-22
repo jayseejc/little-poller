@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jayseeofficial.littlepoller.Program;
 import com.jayseeofficial.littlepoller.R;
+import com.jayseeofficial.littlepoller.objects.Answer;
 import com.jayseeofficial.littlepoller.objects.Poll;
 
 import java.util.List;
@@ -37,6 +38,33 @@ public class DebugActivity extends ActionBarActivity {
     @OnClick(R.id.btn_debug_add_poll_activity)
     void addPoll() {
         startActivity(new Intent(this, EditPollActivity.class));
+    }
+
+    @OnClick(R.id.btn_debug_add_sample_polls)
+    void addSamplePolls() {
+        int numPolls = 30;
+        int numAnswers = 5;
+        for (int i = 1; i <= numPolls; i++) {
+            Poll poll = new Poll();
+            poll.setTitle("Sample poll " + i);
+            poll.setCreator("Tester");
+            for (int j = 1; j <= numAnswers; j++) {
+                Answer answer = new Answer();
+                answer.setText("Sample answer " + j);
+                poll.addAnswer(answer);
+            }
+            Program.pollManager.savePoll(poll);
+            txtDump.append("Added poll \"" + poll.getTitle() + "\"\n");
+        }
+    }
+
+    @OnClick(R.id.btn_debug_clear_polls)
+    void clearPolls() {
+        List<Poll> polls = Program.pollManager.getAllPolls();
+        for (Poll poll : polls) {
+            Program.pollManager.deletePoll(poll.getId());
+            txtDump.append("Removed poll \"" + poll.getTitle() + "\"\n");
+        }
     }
 
     @Override

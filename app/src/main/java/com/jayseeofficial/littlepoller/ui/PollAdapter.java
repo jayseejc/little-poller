@@ -1,6 +1,9 @@
 package com.jayseeofficial.littlepoller.ui;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.v7.widget.CardView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +63,12 @@ public class PollAdapter extends ArrayAdapter<Poll> {
             view.setTag(holder);
         }
         Poll poll = polls.get(position);
+
+        if (view instanceof CardView) {
+            Resources res = context.getResources();
+            ((CardView) view).setCardElevation(TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, res.getDimension(R.dimen.card_height), res.getDisplayMetrics()));
+        }
 
         holder.txtTitle.setText(poll.getTitle());
         holder.txtCreator.setText(poll.getCreator());

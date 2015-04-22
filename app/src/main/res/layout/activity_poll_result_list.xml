@@ -11,6 +11,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv_polls" />
+        android:id="@+id/lv_polls"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/card_list_divider" />
 
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jayseeofficial.littlepoller.BuildConfig;
 import com.jayseeofficial.littlepoller.Program;
 import com.jayseeofficial.littlepoller.R;
 import com.jayseeofficial.littlepoller.objects.Poll;
@@ -22,6 +23,8 @@ import butterknife.OnItemLongClick;
 public class PollListActivity extends ActionBarActivity {
 
     private static final int EDIT_REQUEST_CODE = 4562;
+
+    private int debugItemId = -1;
 
     @InjectView(R.id.lv_polls)
     ListView lvPolls;
@@ -99,11 +102,21 @@ public class PollListActivity extends ActionBarActivity {
         lvPolls.setAdapter(adapter);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        refreshPolls();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_poll_list, menu);
+        if (BuildConfig.DEBUG) {
+            MenuItem debugItem = menu.add("Debug");
+            debugItemId = debugItem.getItemId();
+        }
         return true;
     }
 
@@ -117,6 +130,9 @@ public class PollListActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_view_results) {
             showResultsActivity();
+            return true;
+        } else if (id == debugItemId) {
+            startActivity(new Intent(this, DebugActivity.class));
             return true;
         }
 
